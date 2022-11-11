@@ -36,13 +36,13 @@ app.use(passportSessionMiddleware);
 
 app.use("/authenticate", authenticate);
 app.use("/profile", profile);
-app.use("/collection", collection);
-app.use("/collections", collections);
-app.use("/season", season);
-app.use("/episode", episode);
-app.use("/source", source);
-app.use("/subtitle", subtitle);
-app.use("/file", file);
+app.use(collection);
+app.use(collections);
+app.use(season);
+app.use(episode);
+app.use(source);
+app.use(subtitle);
+app.use(file);
 
 app.get("/", (req, res) => {
   res.json({

@@ -1,7 +1,6 @@
 export type ApplicationSecret = string;
 
 export type CheckResult = boolean;
-export type CollectionList = string[];
 
 export enum Language {
   en_EN = "en_EN",
@@ -89,7 +88,7 @@ export default interface DatabaseAdapter {
   filePatch(options: PatchFileOptiopns): Promise<void>;
   fileDelete(options: DeleteFileOptions): Promise<void>;
 
-  collections(options: CollectionsOptions): Promise<CollectionList>;
+  collections(options: CollectionsOptions): Promise<Collection[]>;
 
   collectionFind(options: FindCollectionByIdOptions): Promise<Collection>;
   collectionCreate(options: CreateCollectionOptions): Promise<Collection>;

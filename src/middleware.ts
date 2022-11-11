@@ -32,7 +32,7 @@ export const ensureLoggedIn = (redirect?: string): RequestHandler => {
       if (profile.scopes?.includes(env("STRICT") && env("STRICT") === "true" ? "restricted" : "user")) {
         return next();
       } else {
-        console.log(`${profile.username} (${profile.uid}) is not whitelisted and tried to access ${req.originalUrl}`);
+        console.warn(`${profile.username} (${profile.uid}) is not whitelisted and tried to access ${req.originalUrl}`);
         if (req.method !== "GET" || !redirect) {
           return res.sendStatus(403);
         }

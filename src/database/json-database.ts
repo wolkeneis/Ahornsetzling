@@ -76,7 +76,7 @@ export default class JsonDatabaseImpl implements DatabaseAdapter {
     await this.database.delete(`/files/${options.fileId}`);
   }
 
-  async collections(scopes: ("*" | "user" | "admin" | "restricted")[]): Promise<string[]> {
+  async collections(scopes: ("*" | "user" | "admin" | "restricted")[]): Promise<Collection[]> {
     return (
       (await this.database.filter(
         "/collections",

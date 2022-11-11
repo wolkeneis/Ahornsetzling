@@ -14,9 +14,7 @@ router.post("/collections", async (req, res) => {
   try {
     const collections: v1.operations["post-profile-collections"]["responses"]["200"]["content"]["application/json"] = await Promise.all(
       (
-        await Promise.all(
-          (await database.collections(profile.scopes)).map(async (collectionId) => await database.collectionFind({ collectionId: collectionId }))
-        )
+        await database.collections(profile.scopes)
       ).map(async (fetchedCollection) => {
         let thumbnail: File | undefined = undefined;
         if (fetchedCollection.thumbnail) {
