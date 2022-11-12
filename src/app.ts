@@ -4,6 +4,7 @@ import "./database/index.js";
 import { env } from "./environment.js";
 import { passportMiddleware, passportSessionMiddleware, sessionMiddleware } from "./middleware.js";
 import { authenticate, collection, collections, episode, file, profile, season, source, subtitle } from "./routes/index.js";
+import "./strategies.js";
 
 const app = express();
 
