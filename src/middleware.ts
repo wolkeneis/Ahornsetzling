@@ -29,7 +29,7 @@ export const ensureLoggedIn = (redirect?: string): RequestHandler => {
   return async (req, res, next) => {
     if (req.isAuthenticated()) {
       const profile = req.user as Profile;
-      if (profile.scopes?.includes(env("STRICT") && env("STRICT") === "true" ? "restricted" : "user")) {
+      if (profile.scopes.includes(!!env("STRICT") && env("STRICT") === "true" ? "restricted" : "user")) {
         return next();
       } else {
         console.warn(`${profile.username} (${profile.uid}) is not whitelisted and tried to access ${req.originalUrl}`);
