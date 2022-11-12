@@ -11,10 +11,11 @@ export const sessionMiddleware: RequestHandler = session({
   store: new FileStore({ path: env("FILESTORE_PATH") || "sessions" }),
   secret: envRequire("SECRET"),
   resave: true,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     path: "/",
     httpOnly: true,
+    sameSite: "none",
     secure: true,
     maxAge: 604800000
   }

@@ -8,9 +8,7 @@ import "./strategies.js";
 
 const app = express();
 
-const trustProxy = Number(env("TRUST_PROXY") ?? 0);
-console.log(trustProxy);
-app.set("trust proxy", trustProxy);
+app.set("trust proxy", Number(env("TRUST_PROXY") ?? 0));
 
 const whitelist = [
   env("CONTROL_ORIGIN") ?? "https://ahornwald.wolkeneis.dev",
