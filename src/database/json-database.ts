@@ -47,10 +47,10 @@ export default class JsonDatabaseImpl implements DatabaseAdapter {
     return await this.database.getObject<Profile>(`/profiles/${options.uid}`);
   }
   async profilePatch(options: PatchUserOptiopns): Promise<void> {
-    if (!this.database.exists(`/profiles/${options.uid}`)) {
+    if (!(await this.database.exists(`/profiles/${options.uid}`))) {
       options.scopes = ["user"];
     }
-    this.database.push(`/profiles/${options.uid}`, options, false);
+    await this.database.push(`/profiles/${options.uid}`, options, false);
   }
 
   async fileFind(options: FindFileByIdOptions): Promise<File> {

@@ -39,8 +39,10 @@ passport.use(
       done: (error?: Error | null, user?: Profile, info?: object) => void
     ) => {
       database.profilePatch({
-        ...profile,
-        scopes: undefined
+        avatar: profile.avatar,
+        creationDate: profile.creationDate,
+        uid: profile.uid,
+        username: profile.username
       });
       done(null, profile);
     }
