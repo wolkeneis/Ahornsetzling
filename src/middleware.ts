@@ -11,7 +11,7 @@ export const sessionMiddleware: express.RequestHandler = session({
   store: new FileStore(),
   secret: envRequire("SECRET"),
   resave: true,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     path: "/",
     sameSite: "none",
