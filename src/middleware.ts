@@ -8,11 +8,14 @@ import { env, envRequire } from "./environment.js";
 const FileStore = createSessionFileStore(session);
 
 export const sessionMiddleware: RequestHandler = session({
+  store: new FileStore({ path: env("FILESTORE_PATH") || "sessions" }),
   secret: envRequire("SECRET"),
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     path: "/",
     httpOnly: true,
-    secure: false,
+    secure: true,
     maxAge: 604800000
   }
 });
