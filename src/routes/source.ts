@@ -10,7 +10,7 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/source", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/source"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
@@ -40,7 +40,7 @@ router.post("/source", async (req, res) => {
   }
 });
 
-router.put("/source", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/source"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.seasonId || !body.episodeId || !body.language || !body.key) {
@@ -89,7 +89,7 @@ router.put("/source", async (req, res) => {
   }
 });
 
-router.patch("/source", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/source"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.episodeId || !body.seasonId || !(body.language || body.key || body.subtitles)) {
@@ -131,7 +131,7 @@ router.patch("/source", async (req, res) => {
   }
 });
 
-router.delete("/source", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/source"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.seasonId || !body.episodeId) {

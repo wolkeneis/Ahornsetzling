@@ -9,7 +9,7 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/episode", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/episode"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.seasonId) {
@@ -52,7 +52,7 @@ router.post("/episode", async (req, res) => {
   }
 });
 
-router.put("/episode", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/episode"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.seasonId || body.index === undefined || !body.name) {
@@ -87,7 +87,7 @@ router.put("/episode", async (req, res) => {
   }
 });
 
-router.patch("/episode", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/episode"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.seasonId || !(body.index !== undefined || body.name)) {
@@ -112,7 +112,7 @@ router.patch("/episode", async (req, res) => {
   }
 });
 
-router.delete("/episode", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/episode"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.seasonId) {

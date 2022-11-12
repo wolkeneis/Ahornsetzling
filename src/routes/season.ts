@@ -9,7 +9,7 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/season", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/season"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
@@ -56,7 +56,7 @@ router.post("/season", async (req, res) => {
   }
 });
 
-router.put("/season", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/season"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.collectionId || body.index === undefined) {
@@ -91,7 +91,7 @@ router.put("/season", async (req, res) => {
   }
 });
 
-router.patch("/season", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/season"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || body.index === undefined) {
@@ -117,7 +117,7 @@ router.patch("/season", async (req, res) => {
   }
 });
 
-router.delete("/season", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/season"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {

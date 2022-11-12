@@ -9,9 +9,9 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/collection", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["post-profile-collection"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/collection"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
     return res.sendStatus(400);
   }
@@ -23,7 +23,7 @@ router.post("/collection", async (req, res) => {
     if (collection.owner !== profile.uid && collection.visibility === Visibility.private) {
       return res.sendStatus(403);
     }
-    const response: v1.operations["post-profile-collection"]["responses"]["200"]["content"]["application/json"] = {
+    const response: v1.paths["/collection"]["post"]["responses"]["200"]["content"]["application/json"] = {
       id: collection.id,
       name: collection.name,
       visibility: collection.visibility,
@@ -64,9 +64,9 @@ router.post("/collection", async (req, res) => {
   }
 });
 
-router.put("/collection", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["put-profile-collection"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/collection"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.name) {
     return res.sendStatus(400);
   }
@@ -89,7 +89,7 @@ router.put("/collection", async (req, res) => {
       thumbnail: thumbnail?.id,
       owner: profile.uid
     });
-    const response: v1.operations["put-profile-collection"]["responses"]["200"]["content"]["application/json"] = {
+    const response: v1.paths["/collection"]["put"]["responses"]["200"]["content"]["application/json"] = {
       id: collection.id,
       name: collection.name,
       visibility: collection.visibility,
@@ -130,9 +130,9 @@ router.put("/collection", async (req, res) => {
   }
 });
 
-router.patch("/collection", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["patch-profile-collection"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/collection"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !(body.name || body.visibility || body.thumbnail)) {
     return res.sendStatus(400);
   }
@@ -167,9 +167,9 @@ router.patch("/collection", async (req, res) => {
   }
 });
 
-router.delete("/collection", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["delete-profile-collection"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/collection"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
     return res.sendStatus(400);
   }

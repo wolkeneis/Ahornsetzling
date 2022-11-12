@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import passport from "passport";
+import { env } from "../environment.js";
 import "../strategies.js";
 
 const router: Router = express.Router();
@@ -12,7 +13,7 @@ router.get(
     failureRedirect: "/"
   }),
   (req, res) => {
-    res.redirect(process.env.CONTROL_ORIGIN + "/redirect/nodes");
+    res.redirect(`${env("CONTROL_ORIGIN") ?? "https://ahornwald.wolkeneis.dev"}/redirect/nodes`);
   }
 );
 

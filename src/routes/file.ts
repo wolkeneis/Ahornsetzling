@@ -10,9 +10,9 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/file", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["post-profile-file"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/file"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || (body.ttl && (typeof body.ttl !== "number" || body.ttl > 43200 || body.ttl < 60))) {
     return res.sendStatus(400);
   }
@@ -25,7 +25,7 @@ router.post("/file", async (req, res) => {
       return res.sendStatus(403);
     }
     const url = await signDownloadUrl({ uid: fileMetadata.owner, fileId: fileMetadata.id, filename: fileMetadata.name }, body.ttl ?? 14400);
-    const file: v1.operations["post-profile-file"]["responses"]["200"]["content"]["application/json"] = {
+    const file: v1.paths["/file"]["post"]["responses"]["200"]["content"]["application/json"] = {
       id: fileMetadata.id,
       url: url,
       ttl: body.ttl ?? 14400
@@ -37,9 +37,9 @@ router.post("/file", async (req, res) => {
   }
 });
 
-router.put("/file", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["put-profile-file"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/file"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.name) {
     return res.sendStatus(400);
   }
@@ -47,7 +47,7 @@ router.put("/file", async (req, res) => {
     const fileId = uuidv4();
     await database.fileCreate({ id: fileId, name: body.name, owner: profile.uid, private: body.private ?? true });
     const url = await signUploadUrl({ uid: profile.uid, fileId: fileId });
-    const file: v1.operations["put-profile-file"]["responses"]["200"]["content"]["application/json"] = {
+    const file: v1.paths["/file"]["put"]["responses"]["200"]["content"]["application/json"] = {
       id: fileId,
       url: url,
       ttl: 14400
@@ -59,9 +59,9 @@ router.put("/file", async (req, res) => {
   }
 });
 
-router.patch("/file", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["patch-profile-file"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/file"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
     return res.sendStatus(400);
   }
@@ -85,9 +85,9 @@ router.patch("/file", async (req, res) => {
   }
 });
 
-router.delete("/file", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
-  const body: v1.operations["delete-profile-file"]["requestBody"]["content"]["application/json"] = req.body;
+  const body: v1.paths["/file"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
     return res.sendStatus(400);
   }

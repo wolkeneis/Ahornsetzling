@@ -35,7 +35,7 @@ passport.use(
       req: Request,
       accessToken: string,
       refreshToken: string,
-      profile: moos_api_v1.operations["get-application-profile"]["responses"]["200"]["content"]["application/json"],
+      profile: moos_api_v1.paths["/application/profile"]["get"]["responses"]["200"]["content"]["application/json"],
       done: (error?: Error | null, user?: Profile, info?: object) => void
     ) => {
       database.profilePatch({

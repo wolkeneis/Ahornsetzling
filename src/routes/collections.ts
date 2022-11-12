@@ -9,10 +9,10 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/collections", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
   try {
-    const collections: v1.operations["post-profile-collections"]["responses"]["200"]["content"]["application/json"] = await Promise.all(
+    const collections: v1.paths["/collections"]["post"]["responses"]["200"]["content"]["application/json"] = await Promise.all(
       (
         await database.collections(profile.scopes)
       ).map(async (fetchedCollection) => {

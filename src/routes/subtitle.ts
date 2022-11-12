@@ -10,7 +10,7 @@ const router: Router = express.Router();
 
 router.use(ensureLoggedIn());
 
-router.post("/subtitle", async (req, res) => {
+router.post("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/subtitle"]["post"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id) {
@@ -40,7 +40,7 @@ router.post("/subtitle", async (req, res) => {
   }
 });
 
-router.put("/subtitle", async (req, res) => {
+router.put("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/subtitle"]["put"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.seasonId || !body.episodeId || !body.language || !body.key) {
@@ -87,7 +87,7 @@ router.put("/subtitle", async (req, res) => {
   }
 });
 
-router.patch("/subtitle", async (req, res) => {
+router.patch("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/subtitle"]["patch"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.episodeId || !body.seasonId || !(body.language || body.key)) {
@@ -125,7 +125,7 @@ router.patch("/subtitle", async (req, res) => {
   }
 });
 
-router.delete("/subtitle", async (req, res) => {
+router.delete("/", async (req, res) => {
   const profile = req.user as Profile;
   const body: v1.paths["/subtitle"]["delete"]["requestBody"]["content"]["application/json"] = req.body;
   if (!body || !body.id || !body.seasonId || !body.episodeId) {

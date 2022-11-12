@@ -21,7 +21,7 @@ router.delete("/", (req, res) => {
   if (req.isAuthenticated()) {
     req.logout({ keepSessionInfo: false }, (error) => console.error(error));
   }
-  res.redirect(process.env.CONTROL_ORIGIN + "/redirect/nodes");
+  res.redirect(`${env("CONTROL_ORIGIN") ?? "https://ahornwald.wolkeneis.dev"}/redirect/nodes`);
 });
 
 export default router;
