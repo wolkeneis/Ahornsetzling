@@ -1,4 +1,4 @@
-import express, { RequestHandler } from "express";
+import { RequestHandler } from "express";
 import session from "express-session";
 import passport from "passport";
 import createSessionFileStore from "session-file-store";
@@ -7,16 +7,12 @@ import { env, envRequire } from "./environment.js";
 
 const FileStore = createSessionFileStore(session);
 
-export const sessionMiddleware: express.RequestHandler = session({
-  store: new FileStore(),
+export const sessionMiddleware: RequestHandler = session({
   secret: envRequire("SECRET"),
-  resave: true,
-  saveUninitialized: true,
   cookie: {
     path: "/",
-    sameSite: "none",
     httpOnly: true,
-    secure: true,
+    secure: false,
     maxAge: 604800000
   }
 });
