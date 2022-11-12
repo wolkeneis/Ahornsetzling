@@ -11,7 +11,8 @@ const s3Client = new S3Client({
     accessKeyId: envRequire("S3_ACCESS_KEY_ID"),
     secretAccessKey: envRequire("S3_SECRET_ACCESS_KEY")
   },
-  region: "nl-1"
+  region: "nl-1",
+  forcePathStyle: env("FORCE_PATH_STYLE") ? env("FORCE_PATH_STYLE") === "true" : true
 });
 
 export async function deleteFile(options: { uid: string; fileId: string }) {
